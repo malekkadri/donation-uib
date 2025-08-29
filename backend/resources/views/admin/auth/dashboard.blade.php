@@ -50,9 +50,10 @@
                         </div>
                         <h1 class="mt-1 mb-3">
                             @php
-                                if(date('h') < 12) {
+                                $hour = (int) date('H');
+                                if ($hour < 12) {
                                     echo 'Good Morning!';
-                                } else if(date('h') < 16) {
+                                } elseif ($hour < 16) {
                                     echo 'Good Afternoon!';
                                 } else {
                                     echo 'Good Evening!';
