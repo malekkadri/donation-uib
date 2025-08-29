@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Donation;
+use App\Models\Contact;
+use App\Models\Members;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,7 +81,14 @@ class UserController extends Controller
             'keywords' => 'dashboard, page',
         ];
 
-        return view('admin.auth.dashboard', compact('settings'));
+        $stats = [
+            'donations' => Donation::count(),
+            'donation_amount' => Donation::sum('amount'),
+            'queries' => Contact::count(),
+            'members' => Members::count(),
+        ];
+
+        return view('admin.auth.dashboard', compact('settings', 'stats'));
     }
 
     public function logout()
