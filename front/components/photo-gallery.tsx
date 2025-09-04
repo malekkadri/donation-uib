@@ -8,6 +8,7 @@ import { Dialog, DialogContent } from "@/components/ui/dialog"
 import { X, ChevronLeft, ChevronRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { useLanguage } from "@/contexts/language-context"
+import { getBackendUrl } from "@/lib/utils"
 
 interface Media {
   id: number
@@ -61,7 +62,7 @@ export default function PhotoGallery({ media }: PhotoGalleryProps) {
     if (!name || name.includes("placeholder")) {
       return `/placeholder.svg?height=400&width=400&query=photo`
     }
-    return `http://127.0.0.1:8000/images/albums/${name}`
+    return `${getBackendUrl()}/images/albums/${name}`
   }
 
   return (

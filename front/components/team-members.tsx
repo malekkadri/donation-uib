@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { motion } from "framer-motion"
 import { useLanguage } from "@/contexts/language-context"
+import { getBackendUrl } from "@/lib/utils"
 
 interface Member {
   id: number
@@ -63,7 +64,7 @@ export default function TeamMembers() {
     if (!image || image.includes("placeholder")) {
       return `/placeholder.svg?height=128&width=128&query=person`
     }
-    return `http://127.0.0.1:8000/images/members/${image}`
+    return `${getBackendUrl()}/images/members/${image}`
   }
 
   if (error) {
