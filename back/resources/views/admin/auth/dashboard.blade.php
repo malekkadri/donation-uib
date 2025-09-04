@@ -63,6 +63,130 @@
                 </div>
             </div>
         </div>
+
+        @if(!empty($stats))
+        <div class="row">
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Admins</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="users"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_users'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Members</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="user"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_members'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Albums</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="book"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_albums'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Media</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="image"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_media'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Queries</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="help-circle"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_queries'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Total Donations</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="heart"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">{{ $stats['total_donations'] }}</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col mt-0">
+                                <h5 class="card-title">Donation Amount</h5>
+                            </div>
+                            <div class="col-auto">
+                                <div class="stat text-primary">
+                                    <i class="align-middle" data-feather="dollar-sign"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <h1 class="mt-1 mb-3">${{ number_format($stats['total_donation_amount'], 2) }}</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        @endif
     </div>
 @endsection
 

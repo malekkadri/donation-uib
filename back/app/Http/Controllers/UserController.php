@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Token;
 use App\Models\User;
+use App\Models\Albums;
+use App\Models\Members;
+use App\Models\Contact;
+use App\Models\Donation;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -78,7 +83,17 @@ class UserController extends Controller
             'keywords' => 'dashboard, page',
         ];
 
-        return view('admin.auth.dashboard', compact('settings'));
+        $stats = [
+            'total_users' => User::count(),
+            'total_members' => Members::count(),
+            'total_albums' => Albums::count(),
+            'total_media' => Media::count(),
+            'total_queries' => Contact::count(),
+            'total_donations' => Donation::count(),
+            'total_donation_amount' => Donation::sum('amount'),
+        ];
+
+        return view('admin.auth.dashboard', compact('settings', 'stats'));
     }
 
     public function logout()
