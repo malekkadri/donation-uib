@@ -35,7 +35,7 @@ class QueriesApiController extends Controller
             $validator = Validator::make($request->all(), [
                 'name' => 'required|string|max:50',
                 'email' => 'required|email',
-                'mobile' => 'required|string',
+                'mobile' => 'nullable|string',
                 'message' => 'required|string',
             ]);
 
@@ -48,9 +48,9 @@ class QueriesApiController extends Controller
                 ], 422);
             }
 
-            // Check if the contact table exists
-            if (!Schema::hasTable('contact')) {
-                Log::warning('Contact table does not exist');
+            // Check if the contacts table exists
+            if (!Schema::hasTable('contacts')) {
+                Log::warning('Contacts table does not exist');
                 return response()->json([
                     'success' => true,
                     'message' => 'Contact form submitted successfully (table not found, but validation passed)'
