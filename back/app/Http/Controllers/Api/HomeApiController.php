@@ -128,9 +128,9 @@ class HomeApiController extends Controller
             $lastPage = ceil($total / $perPage);
 
             // Get media for each album if table exists
-            if (DB::getSchemaBuilder()->hasTable('album_media')) {
+            if (DB::getSchemaBuilder()->hasTable('medias')) {
                 foreach ($albums as $album) {
-                    $media = DB::table('album_media')
+                    $media = DB::table('medias')
                         ->where('album_id', $album->id)
                         ->get();
                     $album->media = $media;
@@ -198,8 +198,8 @@ class HomeApiController extends Controller
             }
 
             // Get media for the album if table exists
-            if (DB::getSchemaBuilder()->hasTable('album_media')) {
-                $media = DB::table('album_media')
+            if (DB::getSchemaBuilder()->hasTable('medias')) {
+                $media = DB::table('medias')
                     ->where('album_id', $album->id)
                     ->get();
                 $album->media = $media;
