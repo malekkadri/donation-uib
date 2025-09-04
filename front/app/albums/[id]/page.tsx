@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react"
 import { useParams, useRouter } from "next/navigation"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Skeleton } from "@/components/ui/skeleton"
 import { ArrowLeft } from "lucide-react"
 import PhotoGallery from "@/components/photo-gallery"
 import { useLanguage } from "@/contexts/language-context"
+import { getBackendUrl } from "@/lib/utils"
 
 interface Album {
   id: number
@@ -63,6 +65,13 @@ export default function AlbumDetailPage() {
     fetchAlbum()
   }, [params.id, t])
 
+  const getImageUrl = (name: string) => {
+    if (!name || name.includes("placeholder")) {
+      return `/placeholder.svg?height=600&width=1200&query=album`
+    }
+    return `${getBackendUrl()}/images/albums/${name}`
+  }
+
   return (
     <div className="container py-12">
       <Button variant="ghost" className="mb-6 flex items-center gap-2" onClick={() => router.back()}>
@@ -86,14 +95,25 @@ export default function AlbumDetailPage() {
         </Card>
       ) : album ? (
         <div>
+          {album.media && album.media.length > 0 && (
+            <div className="relative mb-8 aspect-[16/9] w-full overflow-hidden rounded-md">
+              <Image
+                src={getImageUrl(album.media[0].name) || "/placeholder.svg"}
+                alt={album.name}
+                fill
+                className="object-cover"
+              />
+            </div>
+          )}
+
           <h1 className="text-3xl font-bold mb-4">{album.name}</h1>
           <div className="prose max-w-none mb-8" dangerouslySetInnerHTML={{ __html: album.description }} />
 
-          {album.media && album.media.length > 0 ? (
-            <PhotoGallery media={album.media} />
-          ) : (
+          {album.media && album.media.length > 1 ? (
+            <PhotoGallery media={album.media.slice(1)} />
+          ) : album.media && album.media.length === 0 ? (
             <div className="text-center py-12 text-muted-foreground">{t("albumDetail.noPhotos")}</div>
-          )}
+          ) : null}
         </div>
       ) : (
         <div className="text-center py-12 text-muted-foreground">{t("albumDetail.notFound")}</div>
