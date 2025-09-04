@@ -9,6 +9,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import { motion } from "framer-motion"
 import { useLanguage } from "@/contexts/language-context"
+import { getBackendUrl } from "@/lib/utils"
 
 interface Album {
   id: number
@@ -95,7 +96,7 @@ export default function AlbumGrid() {
     if (!name || name.includes("placeholder")) {
       return `/placeholder.svg?height=192&width=384&query=album`
     }
-    return `http://127.0.0.1:8000/images/albums/${name}`
+    return `${getBackendUrl()}/images/albums/${name}`
   }
 
   if (error) {
